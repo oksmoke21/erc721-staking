@@ -35,7 +35,7 @@ contract StakingToken is ERC20, ERC721Holder, Ownable{
         uint interestRate;
         if(timeElapsed >= 52 weeks) // years has been deprecated
         {
-            interestRate = 5;
+            interestRate = 15;
         }
         else if(timeElapsed >= 26 weeks)
         {
