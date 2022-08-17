@@ -33,15 +33,19 @@ contract StakingToken is ERC20, ERC721Holder, Ownable{
     function calculateTokens(uint tokenId) public view returns(uint256){
         uint timeElapsed = block.timestamp - nftStakedAt[tokenId];
         uint interestRate;
-        if(timeElapsed >= 52 weeks) // years has been deprecated
+        if(timeElapsed <= 30 days) // years has been deprecated
         {
-            interestRate = 15;
+            interestRate = 5;
         }
-        else if(timeElapsed >= 26 weeks)
+        else if(timeElapsed <= 26 weeks)
         {
             interestRate = 10;
         }
-        else interestRate = 5;
+        else if(timeElapsed <= 52 weeks)
+        {
+            interestRate = 15;
+        }
+        else interestRate = 15;
         return (timeElapsed*interestRate)*(10**18)/100; // ERC20: 1 token = 10^18 subtokens
     }
 }
